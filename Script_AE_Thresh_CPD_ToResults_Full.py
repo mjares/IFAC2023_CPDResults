@@ -11,14 +11,14 @@ os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
 
 # Params
 show = True
-savefilename = 'CPDResults_NOM_LOE_AtNU_Ep20_2.rs'
+savefilename = 'CPDResults_NOM_LOE_AtNU_Ep4000_1.rs'
 
 # Parameters
 time_horizons = [1, 10, 20, 30, 40]
 ci_list = [95, 96, 97, 98, 99]
 
 # Dataset
-dFilename = 'CPDDataset_NOM_LOE_AtNU_EpCount_20.ds'
+dFilename = 'CPDDataset_NOM_LOE_AtNU_EpCount_4000.ds'
 dsetFile = open(dFilename, 'rb')
 dataset = pickle.load(dsetFile)
 no_episodes = dataset.no_episodes
