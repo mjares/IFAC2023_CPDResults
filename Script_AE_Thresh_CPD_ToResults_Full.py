@@ -43,7 +43,7 @@ for ci in ci_list:
         configResults.time_horizon = th
         configResults.autoencoder_name = ae_model
         for ee in range(no_episodes):  # dataset.no_episodes):
-            # print(f'Episode: {ee + 1}')
+            print(f'Episode: {ee + 1}')
             feature_log = dataset.episodes[ee].features
             starttime = dataset.episodes[ee].changepoint
             stepcount = dataset.episodes[ee].no_samples
