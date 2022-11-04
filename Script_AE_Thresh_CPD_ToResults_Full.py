@@ -11,14 +11,16 @@ os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
 
 # Params
 show = True
-savefilename = 'CPDResults_NOM_LOE_AtNU_Ep4000_1.rs'
+# basesavefilename = 'CPDResults_AtNK_Ep4000_1'
+basesavefilename = 'Results/CPDResults_NOM_LOE_AtNU_Ep20'
 
 # Parameters
 time_horizons = [1, 10, 20, 30, 40]
 ci_list = [95, 96, 97, 98, 99]
 
 # Dataset
-dFilename = 'CPDDataset_NOM_LOE_AtNU_EpCount_4000.ds'
+# dFilename = 'CPDDataset_AtNK_EpCount_4000.ds'
+dFilename = 'CPDDataset_NOM_LOE_AtNU_EpCount_20.ds'
 dsetFile = open(dFilename, 'rb')
 dataset = pickle.load(dsetFile)
 no_episodes = dataset.no_episodes
@@ -37,6 +39,7 @@ for ci in ci_list:
     ae_classifier.load_autoencoder()
     for th in time_horizons:
         print(f'Time Horizon: {th}. Confidence Interval: {ae_classifier.conf_interval}')
+        savefilename = basesavefilename + f'_Th{th}_Ci{ci}.rs'
         configResults = CPDResults()
         configResults.quantile = ae_classifier.Q
         configResults.conf_interval = ae_classifier.conf_interval
@@ -68,8 +71,7 @@ for ci in ci_list:
 
             configResults.episode_results.append(epResults)
 
-        Results.append(configResults)
-
-saveFile = open(savefilename, 'wb')
-pickle.dump(Results, saveFile)
-saveFile.close()
+        Results = configResults
+        saveFile = open(savefilename, 'wb')
+        pickle.dump(Results, saveFile)
+        saveFile.close()
